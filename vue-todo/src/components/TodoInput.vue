@@ -5,23 +5,24 @@
       <i class="addBtn fas fa-plus" aria-hidden="true"></i>
     </span>
 
-    <!-- <modal v-if="showModal" @close="showModal = false">
-      <h3 <slot="header">경고</slot>></h3>
-      <span <slot="footer" @click="showModal = false">
-        할 일을 입력하세요.
-        <i class="closeModalBtn fas fa-times" aria-hidden="true"></i>
-      </span>
-    </modal> -->
+    <Modal v-if="showModal" @close="showModal = false">
+        <h3 slot="header">
+          error
+          <i class="fas fa-times closeModalBtn" @click="showModal = false"></i>
+        </h3>
+        <h3 slot="body"> 내용을 입력해주세요. </h3>
+    </Modal>
   </div>
 </template>
 
 <script>
-// import Modal from './common/Modal.vue'
+import Modal from './common/Modal.vue'
 
 export default {
   data() {
     return {
-      newTodoItem:''
+      newTodoItem:'',
+      showModal: false
     }
   },
   methods: {
@@ -32,18 +33,18 @@ export default {
         this.$emit('addTodoItem',this.newTodoItem);
         this.clearInput();
       }
-      // else
-      // {
-      //   this.showModal = !this.showModal;
-      // }
+      else
+      {
+        this.showModal = !this.showModal;
+      }
     },
     clearInput() {
       this.newTodoItem = '';
     }
-  }//,
-  // components: {
-  //   Modal: Modal
-  // }
+  },
+  components: {
+    Modal: Modal
+  }
 }
 </script>
 
@@ -71,5 +72,8 @@ export default {
   .addBtn {
     color: white;
     vertical-align: middle;
+  }
+  .closeModalBtn {
+    color: #42b983;
   }
 </style>

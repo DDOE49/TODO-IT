@@ -1,7 +1,7 @@
 <template lang="html">
   <section>
     <div>
-        <ul>
+        <transition-group name="list" tag="p">
             <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
                 <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted:todoItem.completed}" @click="toggleComplete(todoItem, index)" aria-hidden="true"></i>
                 <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
@@ -9,7 +9,7 @@
                 <i class="far fa-trash-alt" aria-hidden="true"></i>
                 </span>
             </li>
-        </ul>
+        </transition-group>
     </div>
   </section>
 </template>
@@ -22,7 +22,7 @@ export default {
   //     todoItems: []
   //   }
   // },
-  // created() { //App.vue로 이동
+  // created() {
   //   if (localStorage.length > 0)
   //   {
   //     for (var i = 0; i < localStorage.length; i++)
@@ -78,6 +78,16 @@ export default {
     transition: all 1s;
   }
   .list-enter, .list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  /* 리스트 아이템 트랜지션 효과 */
+
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
     opacity: 0;
     transform: translateY(30px);
   }

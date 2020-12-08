@@ -1,0 +1,28 @@
+import Vue from 'vue'
+import Vuex from  'vuex'
+
+Vue.use(Vuex); // use: vue 플러그인 뷰를 사용하는 모든영역에 global을 적용하고 싶을 때
+
+const storage = {
+    fetch() {
+       const arr = [];
+        if (localStorage.length > 0)
+       {
+         for (let i = 0; i < localStorage.length; i++)
+         {
+           if(localStorage.key(i) !== 'loglevel:webpack-dev-server')
+           {
+             // this.todoItems.push(localStorage.key(i));
+             arr.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+           }
+         }
+       }
+       return arr;
+    }
+};
+
+export const store = new Vuex.Store({
+    state: {
+        todoItems: storage.fetch()
+    }
+});

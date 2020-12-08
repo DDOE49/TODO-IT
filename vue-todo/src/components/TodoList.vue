@@ -2,7 +2,7 @@
   <section>
     <div>
         <transition-group name="list" tag="p">
-            <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
+            <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
                 <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted:todoItem.completed}" @click="toggleComplete(todoItem, index)" aria-hidden="true"></i>
                 <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
                 <span class="removeBtn" type="button" v-on:click="removeTodo(todoItem, index)">
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ['propsdata'],
+  // props: ['propsdata'],
   // data() {
   //   return {
   //     todoItems: []
@@ -66,6 +66,7 @@ export default {
   }
   .checkBtnCompleted {
     color: #b3adad;
+    text-decoration: line-through;
   }
   .textCompleted {
     color: #b3adad;

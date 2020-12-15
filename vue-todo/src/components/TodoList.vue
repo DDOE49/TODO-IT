@@ -33,10 +33,16 @@ export default {
   // },
   methods: {
     removeTodo(todoItem, index) {
-      this.$emit('removeTodo', todoItem, index);
+      // this.$emit('removeTodo', todoItem, index);
+      // const obj = {
+      //   todoItem,
+      //   index
+      // }
+      this.$store.commit('removeOneItem', {todoItem, index});
     },
     toggleComplete(todoItem, index) {
-      this.$emit('toggleItem', todoItem,index);
+      // this.$emit('toggleItem', todoItem,index);
+      this.$store.commit('toggleOneItem', {todoItem, index});
     }
   }
 }
@@ -66,10 +72,11 @@ export default {
   }
   .checkBtnCompleted {
     color: #b3adad;
-    text-decoration: line-through;
+    /* text-decoration: line-through; */
   }
   .textCompleted {
     color: #b3adad;
+    text-decoration: line-through;
   }
   .removeBtn {
     margin-left: auto;

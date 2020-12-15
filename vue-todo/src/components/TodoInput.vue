@@ -30,7 +30,8 @@ export default {
       if(this.newTodoItem !== "")
       {
         // var key   = this.newTodoItem && this.newTodoItem.trim();
-        this.$emit('addTodoItem',this.newTodoItem);
+        // this.$emit('addTodoItem',this.newTodoItem);
+        this.$store.commit('addOneItem',this.newTodoItem);
         this.clearInput();
       }
       else

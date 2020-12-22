@@ -2,10 +2,10 @@
   <section>
     <div>
         <transition-group name="list" tag="p">
-            <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
-                <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted:todoItem.completed}" @click="toggleComplete(todoItem, index)" aria-hidden="true"></i>
+            <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
+                <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted:todoItem.completed}" @click="toggleComplete({todoItem, index})" aria-hidden="true"></i>
                 <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
-                <span class="removeBtn" type="button" v-on:click="removeTodo(todoItem, index)">
+                <span class="removeBtn" type="button" v-on:click="removeTodo({todoItem, index})">
                 <i class="far fa-trash-alt" aria-hidden="true"></i>
                 </span>
             </li>
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   // props: ['propsdata'],
   // data() {
@@ -32,18 +34,32 @@ export default {
   //   }
   // },
   methods: {
-    removeTodo(todoItem, index) {
-      // this.$emit('removeTodo', todoItem, index);
-      // const obj = {
-      //   todoItem,
-      //   index
-      // }
-      this.$store.commit('removeOneItem', {todoItem, index});
-    },
-    toggleComplete(todoItem, index) {
-      // this.$emit('toggleItem', todoItem,index);
-      this.$store.commit('toggleOneItem', {todoItem, index});
-    }
+    ...mapMutations({
+      removeTodo: 'removeOneItem',
+      toggleComplete: 'toggleOneItem'
+      // removeTodo: 'removeOneItem(todoItem, index)'
+    }),
+    // removeTodo(todoItem, index) {
+    //   // this.$emit('removeTodo', todoItem, index);
+    //   // const obj = {
+    //   //   todoItem,
+    //   //   index
+    //   // }
+    //   this.$store.commit('removeOneItem', {todoItem, index});
+    // },
+    // toggleComplete(todoItem, index) {
+    //   // this.$emit('toggleItem', todoItem,index);
+    //   this.$store.commit('toggleOneItem', {todoItem, index});
+    // }
+  },
+  computed: {
+    // todoItems() {
+    //   return this.$store.getters.storedTodoItems;
+    // }
+      ...mapGetters(['storedTodoItems']) // 이름 일치시킨 배열 리턴식
+      // ...mapGetters({ // getters의 이름과 list에서 사용하는 명이 일치하지 않을 때 객체 리턴식
+      //   todoItem: 'storedTodoItems'
+      // })
   }
 }
 </script>

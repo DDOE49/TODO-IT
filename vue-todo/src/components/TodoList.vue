@@ -56,7 +56,7 @@ export default {
     // todoItems() {
     //   return this.$store.getters.storedTodoItems;
     // }
-      ...mapGetters(['storedTodoItems']) // 이름 일치시킨 배열 리턴식
+    ...mapGetters(['storedTodoItems']) // 이름 일치시킨 배열 리턴식
       // ...mapGetters({ // getters의 이름과 list에서 사용하는 명이 일치하지 않을 때 객체 리턴식
       //   todoItem: 'storedTodoItems'
       // })
